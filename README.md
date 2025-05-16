@@ -15,6 +15,8 @@ This tutorial series is published on YouTube and walks you step-by-step through 
 - **[Part 5 – Implementing Product CRUD](https://youtu.be/DxH_j2_g8KA)**
 - **[Part 6 – Deploying project on Railway Platform](https://youtu.be/giibN3X5i9U)**
 
+
+🔔 **Subscribe to the youtube channel** to stay updated with new parts: [Complete ASP.NET Core eCommerce](https://www.youtube.com/@codewithwahabhussain?sub_confirmation=1)
 🔔 **Subscribe to the playlist** to stay updated with new parts: [Complete ASP.NET Core eCommerce Playlist](https://lnkd.in/dnBgZeQB)
 
 ---
