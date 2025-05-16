@@ -8,11 +8,12 @@ This tutorial series is published on YouTube and walks you step-by-step through 
 
 ### 🎬 Watch the Full Series:
 
-- **[Part 1 – Project Setup & Architecture](https://lnkd.in/d9JCUFtU)**
-- **[Part 2 – Models & Database Design](https://lnkd.in/d7bEhStp)**
-- **[Part 3 – Repository Pattern & Dependency Injection](https://lnkd.in/dUQ8Wh5C)**
-- **[Part 4 – API Layer & Service Integration](https://lnkd.in/dGtVTp-z)**
-- **[Part 5 – Implementing Product CRUD](https://lnkd.in/dvRmXztv)**
+- **[Part 1 – Project Setup & Architecture](https://youtu.be/vnlVZmA2QJA)**
+- **[Part 2 – Models & Database Design](https://youtu.be/-HOMm1LrY8A)**
+- **[Part 3 – Repository Pattern & Dependency Injection](https://youtu.be/P6frq4nxmrw)**
+- **[Part 4 – API Layer & Service Integration](https://youtu.be/9G25dpadnnE)**
+- **[Part 5 – Implementing Product CRUD](https://youtu.be/DxH_j2_g8KA)**
+- **[Part 6 – Deploying project on Railway Platform](https://youtu.be/giibN3X5i9U)**
 
 🔔 **Subscribe to the playlist** to stay updated with new parts: [Complete ASP.NET Core eCommerce Playlist](https://lnkd.in/dnBgZeQB)
 
