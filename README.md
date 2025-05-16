@@ -17,6 +17,7 @@ This tutorial series is published on YouTube and walks you step-by-step through 
 
 
 🔔 **Subscribe to the youtube channel** to stay updated with new parts: [Complete ASP.NET Core eCommerce](https://www.youtube.com/@codewithwahabhussain?sub_confirmation=1)
+
 🔔 **Subscribe to the playlist** to stay updated with new parts: [Complete ASP.NET Core eCommerce Playlist](https://lnkd.in/dnBgZeQB)
 
 ---
