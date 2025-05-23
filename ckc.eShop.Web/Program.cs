@@ -21,7 +21,7 @@ namespace eShopCKC
                     {
                         try
                         {
-                            c.UseSqlServer("Server=yourservername;Integrated Security=true;Initial Catalog=CatalogDbCKC;Encrypt=False;");
+                            c.UseSqlServer("Server=YouServer;Integrated Security=true;Initial Catalog=CKC.eShopOnWeb.CatalogDb;Encrypt=False;");
                         }
                         catch (Exception)
                         {
