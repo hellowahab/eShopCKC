@@ -8,9 +8,9 @@ namespace eShopCKC.Services
 {
     public class CatalogService : ICatalogService
     {
-        private readonly CatalogContext _context;
+        private readonly CatalogDbContext _context;
 
-        public CatalogService(CatalogContext context) {
+        public CatalogService(CatalogDbContext context) {
             _context = context;
         }
 

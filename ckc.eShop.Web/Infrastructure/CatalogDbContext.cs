@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace eShopCKC.Infrastructure
 {
-    public class CatalogContext : DbContext
+    public class CatalogDbContext : DbContext
     {
-        public CatalogContext(DbContextOptions options) : base(options)
+        public CatalogDbContext(DbContextOptions<CatalogDbContext> options) : base(options)
         {
 
         }

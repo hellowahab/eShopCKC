@@ -10,7 +10,7 @@ using eShopCKC.Infrastructure;
 
 namespace eShopCKC.Migrations
 {
-    [DbContext(typeof(CatalogContext))]
+    [DbContext(typeof(CatalogDbContext))]
     [Migration("20250503185218_InitialCreate")]
     partial class InitialCreate
     {

@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ckc.eShop.web", "ckc.eShop.Web\ckc.eShop.web.csproj", "{FA861134-D297-59A3-ED74-DDA501E20324}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ckc.EShop.Web", "ckc.eShop.Web\Ckc.EShop.Web.csproj", "{FA861134-D297-59A3-ED74-DDA501E20324}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ckc.EShop.Infrastructure", "Ckc.EShop.Infrastructure\Ckc.EShop.Infrastructure.csproj", "{EEC6B7A6-B073-4874-BC69-9339A88299D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{FA861134-D297-59A3-ED74-DDA501E20324}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA861134-D297-59A3-ED74-DDA501E20324}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA861134-D297-59A3-ED74-DDA501E20324}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEC6B7A6-B073-4874-BC69-9339A88299D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEC6B7A6-B073-4874-BC69-9339A88299D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEC6B7A6-B073-4874-BC69-9339A88299D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEC6B7A6-B073-4874-BC69-9339A88299D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

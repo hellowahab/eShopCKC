@@ -16,7 +16,7 @@ namespace eShopCKC.Infrastructure
             {
                 using (var scope = applicationBuilder.ApplicationServices.CreateScope())
                 {
-                    var context = scope.ServiceProvider.GetRequiredService<CatalogContext>();
+                    var context = scope.ServiceProvider.GetRequiredService<CatalogDbContext>();
                     context.Database.Migrate();
 
                     if (!context.CatalogBrands.Any())

@@ -1,5 +1,7 @@
+using Ckc.EShop.Infrastructure.Identity;
 using eShopCKC.Infrastructure;
 using eShopCKC.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace eShopCKC
@@ -16,12 +18,12 @@ namespace eShopCKC
             builder.Services.AddTransient<ICatalogService, CatalogService>();
 
             builder.Services.AddDbContext
-                <CatalogContext>(
+                <CatalogDbContext>(
                     c =>
                     {
                         try
                         {
-                            c.UseSqlServer("Server=YouServer;Integrated Security=true;Initial Catalog=CKC.eShopOnWeb.CatalogDb;Encrypt=False;");
+                            c.UseSqlServer("Server=YouServerName;Integrated Security=true;Initial Catalog=CKC.eShopOnWeb.Catalog;Encrypt=False;");
                         }
                         catch (Exception)
                         {
@@ -30,6 +32,28 @@ namespace eShopCKC
 
                     }
                 );
+
+            builder.Services.AddDbContext
+                <AppIdentityDbContext>(
+                    c =>
+                    {
+                        try
+                        {
+                            c.UseSqlServer("Server=YouServerName;Integrated Security=true;Initial Catalog=CKC.eShopOnWeb.Identity;Encrypt=False;");
+                        }
+                        catch (Exception)
+                        {
+                            throw;
+                        }
+
+                    }
+                );
+
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppIdentityDbContext>()
+                .AddDefaultTokenProviders();
+
+
 
             var app = builder.Build();
 
@@ -55,6 +79,8 @@ namespace eShopCKC
             CatalogContextSeed.SeedAsync(app,
                 app.Services.GetRequiredService<ILoggerFactory>())
                 .Wait();
+
+            AppIdentityDbContextSeed.SeedAsync(app.Services).GetAwaiter().GetResult();
 
             app.Run();
         }

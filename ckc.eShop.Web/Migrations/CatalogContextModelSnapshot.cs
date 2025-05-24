@@ -9,7 +9,7 @@ using eShopCKC.Infrastructure;
 
 namespace eShopCKC.Migrations
 {
-    [DbContext(typeof(CatalogContext))]
+    [DbContext(typeof(CatalogDbContext))]
     partial class CatalogContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
