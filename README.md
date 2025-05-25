@@ -14,7 +14,7 @@ This tutorial series is published on YouTube and walks you step-by-step through 
 - **[Part 4 – API Layer & Service Integration](https://youtu.be/9G25dpadnnE)**
 - **[Part 5 – Implementing Product CRUD](https://youtu.be/DxH_j2_g8KA)**
 - **[Part 6 – Deploying project on Railway Platform](https://youtu.be/giibN3X5i9U)**
-
+- **[Part 7 – Adding Asp.net Identity for User Authentication](https://youtu.be/4eRyKWivr_U)**
 
 🔔 **Subscribe to the youtube channel** to stay updated with new parts: [Complete ASP.NET Core eCommerce](https://www.youtube.com/@codewithwahabhussain?sub_confirmation=1)
 
