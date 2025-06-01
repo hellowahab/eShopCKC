@@ -1,8 +1,8 @@
-﻿using eShopCKC.Services;
-using eShopCKC.ViewModels;
+﻿using Ckc.EShop.Web.Services;
+using Ckc.EShop.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
-namespace eShopCKC.Controllers
+namespace Ckc.EShop.Web.Controllers
 {
     public class CatalogController : Controller
     {
@@ -34,14 +34,14 @@ namespace eShopCKC.Controllers
                     ActualPage = page ?? 0,
                     ItemsPerPage = catalog.Data.Count,
                     TotalItems = catalog.Count,
-                    TotalPages = int.Parse(Math.Ceiling(((decimal)catalog.Count /itemsPage)).ToString())
+                    TotalPages = int.Parse(Math.Ceiling((decimal)catalog.Count /itemsPage).ToString())
                 }             
 
             };
 
-            vm.PaginationInfo.Next = (vm.PaginationInfo.ActualPage == vm.PaginationInfo.TotalPages - 1) ? "is-disabled" : "";
+            vm.PaginationInfo.Next = vm.PaginationInfo.ActualPage == vm.PaginationInfo.TotalPages - 1 ? "is-disabled" : "";
 
-            vm.PaginationInfo.Previous = (vm.PaginationInfo.ActualPage == 0) ? "is-disabled" : "";
+            vm.PaginationInfo.Previous = vm.PaginationInfo.ActualPage == 0 ? "is-disabled" : "";
 
 
             return View(vm);
@@ -54,7 +54,7 @@ namespace eShopCKC.Controllers
         {
             var contentRoot = _env.ContentRootPath + "//Pics";
             var path = Path.Combine(contentRoot, id + ".png");
-            Byte[] b = System.IO.File.ReadAllBytes(path);
+            byte[] b = System.IO.File.ReadAllBytes(path);
             return File(b, "image/png");
         }
     }

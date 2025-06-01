@@ -1,4 +1,5 @@
-﻿@model eShopCKC.Models.CatalogItem
+﻿@using Ckc.EShop.ApplicationCore.Entities
+@model CatalogItem
 
 <form asp-controller="Cart" asp-action="AddToCart">
 	<img class="esh-catalog-thumbnail" src="@Model.PictureUri" />

@@ -1,6 +1,6 @@
-﻿using eShopCKC.Models;
+﻿using Ckc.EShop.ApplicationCore.Entities;
 
-namespace eShopCKC.ViewModels
+namespace Ckc.EShop.Web.ViewModels
 {
     public class Catalog
     {

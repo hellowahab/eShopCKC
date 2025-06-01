@@ -1,4 +1,4 @@
-namespace eShopCKC.Models
+namespace Ckc.EShop.Web.Models
 {
     public class ErrorViewModel
     {

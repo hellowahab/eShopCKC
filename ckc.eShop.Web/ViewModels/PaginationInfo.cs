@@ -1,4 +1,4 @@
-﻿namespace eShopCKC.ViewModels
+﻿namespace Ckc.EShop.Web.ViewModels
 {
     public class PaginationInfo
     {

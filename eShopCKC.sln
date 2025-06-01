@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ckc.EShop.Web", "ckc.eShop.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ckc.EShop.Infrastructure", "Ckc.EShop.Infrastructure\Ckc.EShop.Infrastructure.csproj", "{EEC6B7A6-B073-4874-BC69-9339A88299D8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ckc.EShop.ApplicationCore", "Ckc.EShop.ApplicationCore\Ckc.EShop.ApplicationCore.csproj", "{3CCD1309-380D-48BE-A1F9-E9F7ABF67912}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{EEC6B7A6-B073-4874-BC69-9339A88299D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEC6B7A6-B073-4874-BC69-9339A88299D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EEC6B7A6-B073-4874-BC69-9339A88299D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CCD1309-380D-48BE-A1F9-E9F7ABF67912}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CCD1309-380D-48BE-A1F9-E9F7ABF67912}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CCD1309-380D-48BE-A1F9-E9F7ABF67912}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CCD1309-380D-48BE-A1F9-E9F7ABF67912}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

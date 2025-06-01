@@ -1,7 +1,10 @@
-﻿using eShopCKC.Models;
+﻿using Ckc.EShop.ApplicationCore.Entities;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
-namespace eShopCKC.Infrastructure
+namespace Ckc.EShop.Infrastructure.Data
 {
     public class CatalogContextSeed
     {

@@ -1,7 +1,5 @@
 ﻿using Ckc.EShop.Infrastructure.Identity;
 using Ckc.EShop.Web.ViewModels;
-using eShopCKC.Controllers;
-using eShopCKC.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

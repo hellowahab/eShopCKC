@@ -1,10 +1,11 @@
+using Ckc.EShop.ApplicationCore.Interface;
+using Ckc.EShop.Infrastructure.Data;
 using Ckc.EShop.Infrastructure.Identity;
-using eShopCKC.Infrastructure;
-using eShopCKC.Services;
+using Ckc.EShop.Web.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace eShopCKC
+namespace Ckc.EShop.Web
 {
     public class Program
     {
@@ -53,7 +54,7 @@ namespace eShopCKC
                 .AddEntityFrameworkStores<AppIdentityDbContext>()
                 .AddDefaultTokenProviders();
 
-
+            builder.Services.AddScoped(typeof(IRepository<>),typeof(EFRepository<>));
 
             var app = builder.Build();
 

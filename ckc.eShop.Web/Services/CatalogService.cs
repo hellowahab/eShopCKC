@@ -1,22 +1,31 @@
-﻿using eShopCKC.Infrastructure;
-using eShopCKC.Models;
-using eShopCKC.ViewModels;
+﻿using Ckc.EShop.ApplicationCore.Entities;
+using Ckc.EShop.ApplicationCore.Interface;
+using Ckc.EShop.Infrastructure.Data;
+using Ckc.EShop.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
-namespace eShopCKC.Services
+namespace Ckc.EShop.Web.Services
 {
     public class CatalogService : ICatalogService
     {
-        private readonly CatalogDbContext _context;
+        private readonly IRepository<CatalogItem> _itemRepository;
+        private readonly IRepository<CatalogBrand> _brandRepository;
+        private readonly IRepository<CatalogType> _typeRepository;
 
-        public CatalogService(CatalogDbContext context) {
-            _context = context;
+        public CatalogService(
+            IRepository<CatalogItem> itemRepository,
+            IRepository<CatalogBrand> brandRepository,
+            IRepository<CatalogType> typeRepository
+            ) {
+            _itemRepository = itemRepository;
+            _brandRepository = brandRepository;
+            _typeRepository = typeRepository;
         }
 
         public async Task<IEnumerable<SelectListItem>> GetBrands()
         {
-            var brands = await _context.CatalogBrands.ToListAsync();
+            var brands = _brandRepository.List();
             var items = new List<SelectListItem>();
             items.Add(new SelectListItem()
             {
@@ -37,24 +46,24 @@ namespace eShopCKC.Services
 
         public async Task<Catalog> GetCatalogItems(int pageIndex, int itemsPage, int? brandId, int? typeId)
         {
-            var root = (IQueryable<CatalogItem>) _context.CatalogItems;
+            var root = _itemRepository.List();
 
-            if (typeId.HasValue)
-            {
-                root = root.Where(ci => ci.CatalogTypeId == typeId.Value);
-            }
+            //if (typeId.HasValue)
+            //{
+            //    root = root.Where(ci => ci.CatalogTypeId == typeId.Value);
+            //}
 
-            if (brandId.HasValue)
-            {
-                root = root.Where(ci => ci.CatalogBrandId == brandId.Value);
-            }
+            //if (brandId.HasValue)
+            //{
+            //    root = root.Where(ci => ci.CatalogBrandId == brandId.Value);
+            //}
 
-            var totalItems = await root.LongCountAsync();
+            var totalItems = root.Count;
 
-            var itemOnPage = await root
+            var itemOnPage = root
                 .Skip(itemsPage * pageIndex)
                 .Take(itemsPage)
-                .ToListAsync();
+                .ToList();
 
             itemOnPage = ComposePictureUri(itemOnPage);
 
@@ -81,7 +90,7 @@ namespace eShopCKC.Services
 
         public async Task<IEnumerable<SelectListItem>> GetTypes()
         {
-            var types = await _context.CatalogTypes.ToListAsync();
+            var types = _typeRepository.List();
             var items = new List<SelectListItem>();
             items.Add(new SelectListItem()
             {

@@ -1,7 +1,7 @@
-﻿using eShopCKC.ViewModels;
+﻿using Ckc.EShop.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace eShopCKC.Services
+namespace Ckc.EShop.Web.Services
 {
     public interface ICatalogService
     {

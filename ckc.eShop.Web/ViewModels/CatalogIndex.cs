@@ -1,7 +1,7 @@
-﻿using eShopCKC.Models;
+﻿using Ckc.EShop.ApplicationCore.Entities;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace eShopCKC.ViewModels
+namespace Ckc.EShop.Web.ViewModels
 {
     public class CatalogIndex
     {

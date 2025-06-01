@@ -1,8 +1,8 @@
-﻿using eShopCKC.Models;
+﻿using Ckc.EShop.ApplicationCore.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace eShopCKC.Infrastructure
+namespace Ckc.EShop.Infrastructure.Data
 {
     public class CatalogDbContext : DbContext
     {
