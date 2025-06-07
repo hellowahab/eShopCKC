@@ -13,6 +13,8 @@ namespace Ckc.EShop.ApplicationCore.Interface
 
         List<T> List();
 
+        List<T> List(ISpecification<T> spec);
+
         T Add(T entity);
 
         void Update(T entity);

@@ -30,6 +30,18 @@ namespace Ckc.EShop.Infrastructure.Data
             return _dbContext.Set<T>().ToList();
         }
 
+        public List<T> List(ISpecification<T> spec)
+        {
+            var queryableResultWithInclude = spec.Includes
+                .Aggregate(_dbContext.Set<T>().AsQueryable(),
+                (current, include) => current.Include(include));
+
+            return queryableResultWithInclude
+                    .Where(spec.Criteria)
+                    .ToList();
+
+        }
+
         public T Add(T entity)
         {
             _dbContext.Set<T>().Add(entity);

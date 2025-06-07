@@ -1,5 +1,6 @@
 ﻿using Ckc.EShop.ApplicationCore.Entities;
 using Ckc.EShop.ApplicationCore.Interface;
+using Ckc.EShop.ApplicationCore.Specifications;
 using Ckc.EShop.Infrastructure.Data;
 using Ckc.EShop.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -46,17 +47,9 @@ namespace Ckc.EShop.Web.Services
 
         public async Task<Catalog> GetCatalogItems(int pageIndex, int itemsPage, int? brandId, int? typeId)
         {
-            var root = _itemRepository.List();
-
-            //if (typeId.HasValue)
-            //{
-            //    root = root.Where(ci => ci.CatalogTypeId == typeId.Value);
-            //}
-
-            //if (brandId.HasValue)
-            //{
-            //    root = root.Where(ci => ci.CatalogBrandId == brandId.Value);
-            //}
+            var filterSpecification = new CatalogFilterSpecification(brandId, typeId);
+            var root = _itemRepository.List(filterSpecification);
+            
 
             var totalItems = root.Count;
 
