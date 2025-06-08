@@ -16,6 +16,7 @@ This tutorial series is published on YouTube and walks you step-by-step through 
 - **[Part 6 – Deploying project on Railway Platform](https://youtu.be/giibN3X5i9U)**
 - **[Part 7 – Adding Asp.net Identity for User Authentication](https://youtu.be/4eRyKWivr_U)**
 - **[Part 8 – Implement Repository Pattern using Domain Driven Design](https://youtu.be/DwLeIj3da2U)**
+- **[Part 8 – Specification Pattern Deep Dive](https://youtu.be/lJl74nL7aGE)**
 
 🔔 **Subscribe to the youtube channel** to stay updated with new parts: [Complete ASP.NET Core eCommerce](https://www.youtube.com/@codewithwahabhussain?sub_confirmation=1)
 
