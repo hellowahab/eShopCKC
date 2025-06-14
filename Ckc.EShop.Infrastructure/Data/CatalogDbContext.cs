@@ -10,7 +10,9 @@ namespace Ckc.EShop.Infrastructure.Data
         {
 
         }
-        
+
+        public DbSet<Basket> Baskets { get; set; }
+
         public DbSet<CatalogItem> CatalogItems { get; set; }
 
         public DbSet<CatalogBrand> CatalogBrands { get; set; }

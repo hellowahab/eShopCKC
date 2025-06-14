@@ -20,7 +20,7 @@ namespace Ckc.EShop.Infrastructure.Data
                 using (var scope = applicationBuilder.ApplicationServices.CreateScope())
                 {
                     var context = scope.ServiceProvider.GetRequiredService<CatalogDbContext>();
-                    context.Database.Migrate();
+                    //context.Database.Migrate();
 
                     if (!context.CatalogBrands.Any())
                     {

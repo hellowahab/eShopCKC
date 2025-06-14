@@ -17,7 +17,7 @@ namespace Ckc.EShop.Infrastructure.Identity
             using var scope = serviceProvider.CreateScope();
 
             var context = scope.ServiceProvider.GetRequiredService<AppIdentityDbContext>();
-            context.Database.Migrate();
+            //context.Database.Migrate();
 
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 

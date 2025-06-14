@@ -1,6 +1,7 @@
 using Ckc.EShop.ApplicationCore.Interface;
 using Ckc.EShop.Infrastructure.Data;
 using Ckc.EShop.Infrastructure.Identity;
+using Ckc.EShop.Web.Interfaces;
 using Ckc.EShop.Web.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +17,16 @@ namespace Ckc.EShop.Web
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
             builder.Services.AddTransient<ICatalogService, CatalogService>();
+
+            builder.Services.AddScoped<IBasketService, BasketService>();
 
             builder.Services.AddDbContext
                 <CatalogDbContext>(
@@ -24,7 +34,8 @@ namespace Ckc.EShop.Web
                     {
                         try
                         {
-                            c.UseSqlServer("Server=YouServerName;Integrated Security=true;Initial Catalog=CKC.eShopOnWeb.Catalog;Encrypt=False;");
+                            c.UseInMemoryDatabase("CKC.eShopOnWeb.Catalog");
+                            //c.UseSqlServer("Server=DESKTOP-D1CJQPN;Integrated Security=true;Initial Catalog=CKC.eShopOnWeb.Catalog;Encrypt=False;");
                         }
                         catch (Exception)
                         {
@@ -40,7 +51,8 @@ namespace Ckc.EShop.Web
                     {
                         try
                         {
-                            c.UseSqlServer("Server=YouServerName;Integrated Security=true;Initial Catalog=CKC.eShopOnWeb.Identity;Encrypt=False;");
+                            c.UseInMemoryDatabase("CKC.eShopOnWeb.Identity");
+                            //c.UseSqlServer("Server=DESKTOP-D1CJQPN;Integrated Security=true;Initial Catalog=CKC.eShopOnWeb.Identity;Encrypt=False;");
                         }
                         catch (Exception)
                         {
@@ -68,6 +80,8 @@ namespace Ckc.EShop.Web
 
             app.UseHttpsRedirection();
             app.UseRouting();
+
+            app.UseSession();
 
             app.UseAuthorization();
 
