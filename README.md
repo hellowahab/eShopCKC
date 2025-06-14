@@ -17,6 +17,7 @@ This tutorial series is published on YouTube and walks you step-by-step through 
 - **[Part 7 – Adding Asp.net Identity for User Authentication](https://youtu.be/4eRyKWivr_U)**
 - **[Part 8 – Implement Repository Pattern using Domain Driven Design](https://youtu.be/DwLeIj3da2U)**
 - **[Part 9 – Specification Pattern Deep Dive](https://youtu.be/lJl74nL7aGE)**
+- **[Part 10 – Building Cart & Basket Functionality](https://youtu.be/gV58AAjx6rM)**
 
 🔔 **Subscribe to the youtube channel** to stay updated with new parts: [Complete ASP.NET Core eCommerce](https://www.youtube.com/@codewithwahabhussain?sub_confirmation=1)
 
