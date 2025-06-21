@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 namespace Ckc.EShop.Web.Controllers
 {
     [Route("[Controller]/[action]")]
-    public class CartController : Controller
+    public class BasketController : Controller
     {
         private readonly IBasketService _basketService;
         private const string _basketSessionKey = "basketId";
 
-        public CartController(IBasketService basketService) 
+        public BasketController(IBasketService basketService) 
         {
             _basketService = basketService;
         }
@@ -24,7 +24,7 @@ namespace Ckc.EShop.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddToCart
+        public async Task<IActionResult> AddToBasket
             (CatalogItemViewModel productDetails)
         {
             if (productDetails?.Id == null)
@@ -32,7 +32,7 @@ namespace Ckc.EShop.Web.Controllers
                 return RedirectToAction("Index", "Catalog");
             }
             var basket = await GetBasketFromSessionAsync();
-            await _basketService.AddItemToCart(basket.Id, productDetails.Id,
+            await _basketService.AddItemToBasket(basket.Id, productDetails.Id,
                 productDetails.Price, 1);
             return RedirectToAction("Index");        
         }

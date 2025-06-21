@@ -10,12 +10,15 @@ namespace Ckc.EShop.Web.Services
     {
         private readonly IRepository<Basket> _basketRepository;
         private readonly IRepository<CatalogItem> _itemRepository;
+        private readonly IUriComposer _uriComposer;
 
         public BasketService(IRepository<Basket> basketRepository,
-            IRepository<CatalogItem> itemRepository) 
+            IRepository<CatalogItem> itemRepository,
+            IUriComposer uriComposer) 
         {
             _basketRepository = basketRepository;
             _itemRepository = itemRepository;
+            _uriComposer = uriComposer;
         }
 
         public async Task<BasketViewModel> GetBasket(int basketId)
@@ -41,7 +44,7 @@ namespace Ckc.EShop.Web.Services
                                 };
 
                                 var item = _itemRepository.GetById(i.CatalogItemId);
-                                itemModel.PictureUrl = item.PictureUri;
+                                itemModel.PictureUrl = _uriComposer.ComposePicUri(item.PictureUri);
                                 itemModel.ProductName = item.Name;
                                 return itemModel;                 
 
@@ -70,7 +73,7 @@ namespace Ckc.EShop.Web.Services
         }
 
 
-        public async Task AddItemToCart(int basketId, int catalogItemId, decimal price, int quantity)
+        public async Task AddItemToBasket(int basketId, int catalogItemId, decimal price, int quantity)
         {
             var basket = _basketRepository.GetById(basketId); 
             basket.AddItem(catalogItemId, price, quantity);

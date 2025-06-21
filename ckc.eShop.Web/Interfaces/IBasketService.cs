@@ -11,7 +11,7 @@ namespace Ckc.EShop.Web.Interfaces
 
         Task<BasketViewModel> CreateBasketForUser(string userId);
 
-        Task AddItemToCart(int basketId, int catalogItemId,
+        Task AddItemToBasket(int basketId, int catalogItemId,
             decimal price, int quantity);
 
         Task Checkout(int basketId);

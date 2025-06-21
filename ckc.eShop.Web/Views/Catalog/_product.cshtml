@@ -1,9 +1,9 @@
 ﻿@using Ckc.EShop.ApplicationCore.Entities
 @model CatalogItem
 
-<form asp-controller="Cart" asp-action="AddToCart">
+<form asp-controller="Basket" asp-action="AddToBasket">
 	<img class="esh-catalog-thumbnail" src="@Model.PictureUri" />
-	<input class="esh-catalog-button @((!User.Identity.IsAuthenticated) ? "is-disabled" : "")" type="submit" value="[Add To Cart]"/>
+	<input class="esh-catalog-button @((!User.Identity.IsAuthenticated) ? "is-disabled" : "")" type="submit" value="[Add To Basket]"/>
 	<div class="esh-catalog-name">
 		<span>@Model.Name</span>
 	</div>

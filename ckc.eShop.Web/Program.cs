@@ -1,10 +1,13 @@
+using Ckc.EShop.ApplicationCore;
 using Ckc.EShop.ApplicationCore.Interface;
+using Ckc.EShop.ApplicationCore.Services;
 using Ckc.EShop.Infrastructure.Data;
 using Ckc.EShop.Infrastructure.Identity;
 using Ckc.EShop.Web.Interfaces;
 using Ckc.EShop.Web.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace Ckc.EShop.Web
 {
@@ -27,6 +30,15 @@ namespace Ckc.EShop.Web
             builder.Services.AddTransient<ICatalogService, CatalogService>();
 
             builder.Services.AddScoped<IBasketService, BasketService>();
+
+            builder.Services.Configure<CatalogSettings>(builder.Configuration.GetSection("Catalog"));
+
+            builder.Services.AddSingleton<IUriComposer>(sp =>
+            {
+                var catalogSettings = sp.GetRequiredService<IOptions<CatalogSettings>>().Value;
+                return new UriComposer(catalogSettings);
+            });
+
 
             builder.Services.AddDbContext
                 <CatalogDbContext>(
