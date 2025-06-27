@@ -1,5 +1,7 @@
-﻿using Ckc.EShop.Web.Interfaces;
+﻿using Ckc.EShop.Infrastructure.Identity;
+using Ckc.EShop.Web.Interfaces;
 using Ckc.EShop.Web.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -9,17 +11,20 @@ namespace Ckc.EShop.Web.Controllers
     public class BasketController : Controller
     {
         private readonly IBasketService _basketService;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private const string _basketSessionKey = "basketId";
 
-        public BasketController(IBasketService basketService) 
+        public BasketController(IBasketService basketService,
+            SignInManager<ApplicationUser> signInManager) 
         {
             _basketService = basketService;
+            _signInManager = signInManager;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var basketModel = await GetBasketFromSessionAsync();
+            var basketModel = await GetBasketViewModelAsync();
             return View(basketModel);
         }
 
@@ -31,7 +36,7 @@ namespace Ckc.EShop.Web.Controllers
             {
                 return RedirectToAction("Index", "Catalog");
             }
-            var basket = await GetBasketFromSessionAsync();
+            var basket = await GetBasketViewModelAsync();
             await _basketService.AddItemToBasket(basket.Id, productDetails.Id,
                 productDetails.Price, 1);
             return RedirectToAction("Index");        
@@ -40,27 +45,36 @@ namespace Ckc.EShop.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Checkout()
         {
-            var basket = await GetBasketFromSessionAsync();
+            var basket = await GetBasketViewModelAsync();
             await _basketService.Checkout(basket.Id);
             return View("Checkout");
         }
 
 
-        private async Task<BasketViewModel> GetBasketFromSessionAsync()
+        private async Task<BasketViewModel> GetBasketViewModelAsync()
         {
-            string basketId = HttpContext.Session.GetString(_basketSessionKey);
-            BasketViewModel basket = null;
-            if (basketId == null)
-            {
-                basket = await _basketService.CreateBasketForUser(User.Identity.Name);
-                HttpContext.Session.SetString(_basketSessionKey, basket.Id.ToString());
-            }
-            else
-            { 
-                basket = await _basketService.GetBasket(int.Parse(basketId));
 
+            if (_signInManager.IsSignedIn(HttpContext.User))
+            {
+                return await _basketService.GetOrCreateBasketForUser(User.Identity.Name);
             }
-            return basket;
+
+            string anonymousId = GetorSetBasketCookie();
+            return await _basketService.GetOrCreateBasketForUser(anonymousId);
+                      
+        }
+
+        private string GetorSetBasketCookie()
+        {
+            if (Request.Cookies.ContainsKey(Constants.Basket_CookieName))
+            {
+                return Request.Cookies[Constants.Basket_CookieName];
+            }
+            string anonymousID = Guid.NewGuid().ToString();
+            var cookieOptions = new CookieOptions();
+            cookieOptions.Expires = DateTime.Today.AddYears(1);
+            Response.Cookies.Append(Constants.Basket_CookieName, anonymousID, cookieOptions);
+            return anonymousID;
         }
     }
 }

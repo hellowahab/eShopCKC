@@ -3,7 +3,7 @@
 
 <form asp-controller="Basket" asp-action="AddToBasket">
 	<img class="esh-catalog-thumbnail" src="@Model.PictureUri" />
-	<input class="esh-catalog-button @((!User.Identity.IsAuthenticated) ? "is-disabled" : "")" type="submit" value="[Add To Basket]"/>
+	<input class="esh-catalog-button" type="submit" value="[Add To Basket]"/>
 	<div class="esh-catalog-name">
 		<span>@Model.Name</span>
 	</div>

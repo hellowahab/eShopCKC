@@ -1,9 +1,11 @@
 ﻿using Ckc.EShop.Infrastructure.Identity;
+using Ckc.EShop.Web.Interfaces;
 using Ckc.EShop.Web.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Ckc.EShop.Web.Controllers
 {
@@ -12,14 +14,17 @@ namespace Ckc.EShop.Web.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly string _externalCookieScheme;
+        private readonly IBasketService _basketService;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager) 
+            SignInManager<ApplicationUser> signInManager,
+            IBasketService basketService) 
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _externalCookieScheme = IdentityConstants.ExternalScheme;        
+            _externalCookieScheme = IdentityConstants.ExternalScheme;    
+            _basketService = basketService;
         }
 
         [HttpGet]
@@ -36,27 +41,35 @@ namespace Ckc.EShop.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SignIn(LoginViewModel model, string returnUrl = null)
         {
-            ViewData["ReturnUrl"] = returnUrl;
-            if (ModelState.IsValid)
-            {
-                var result = await _signInManager.PasswordSignInAsync(model.Email,
-                    model.Password, model.RememberMe, lockoutOnFailure: false);
-
-                if (result.Succeeded)
-                {
-                    return RedirectToLocal(returnUrl);
-                }
-                if (result.IsLockedOut)
-                {
-                    return View("Lockout");
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid login Attempt.");
-                    return View(model);
-                }
+            if (!ModelState.IsValid)
+            { 
+                return View(model);
             }
-             return View(model);
+            ViewData["ReturnUrl"] = returnUrl;
+            
+            var result = await _signInManager.PasswordSignInAsync(model.Email,
+                model.Password, model.RememberMe, lockoutOnFailure: false);
+
+            if (result.Succeeded)
+            {
+                string anonymousId = Request.Cookies[Constants.Basket_CookieName];
+                if (!string.IsNullOrEmpty(anonymousId))
+                { 
+                    _basketService.TransferBasket(anonymousId, model.Email);
+                    Response.Cookies.Delete(Constants.Basket_CookieName);
+                }
+
+                return RedirectToLocal(returnUrl);
+            }
+            if (result.IsLockedOut)
+            {
+                return View("Lockout");
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Invalid login Attempt.");
+                return View(model);
+            }
         }
 
         [HttpPost]
