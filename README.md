@@ -1,4 +1,4 @@
-9# 🛒 Build a Production-Ready eCommerce App with ASP.NET Core
+🛒 Build a Production-Ready eCommerce App with ASP.NET Core
 
 Welcome to the official repository for the **Complete Beginner-Friendly eCommerce App Series using ASP.NET Core**. This project is developed as part of a multi-part video tutorial series where we build a **real-world**, **open-source**, and **production-ready** eCommerce web application from scratch.
 
@@ -38,3 +38,11 @@ This tutorial series is published on YouTube and walks you step-by-step through 
 - **API:** RESTful APIs with proper layering and dependency injection
 
 ---
+
+## ☕ Support Me
+
+If you enjoy my projects or find them useful, consider supporting me to keep going:
+
+[![Buy Me a Coffee](https://img.shields.io/badge/-Buy%20me%20a%20coffee-yellow?style=flat-square&logo=buy-me-a-coffee)](https://www.buymeacoffee.com/hellowahab)
+[![Ko-fi](https://img.shields.io/badge/-Ko--fi-red?style=flat-square&logo=ko-fi)](https://ko-fi.com/hellowahab)
+
