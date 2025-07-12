@@ -1,4 +1,5 @@
 ﻿using Ckc.EShop.ApplicationCore.Entities;
+using Ckc.EShop.ApplicationCore.Entities.OrderAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -19,11 +20,20 @@ namespace Ckc.EShop.Infrastructure.Data
 
         public DbSet<CatalogType> CatalogTypes { get; set; }
 
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<OrderItem> OrderItems { get; set; }
+
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<CatalogBrand>(ConfigureCatalogBrand);
             builder.Entity<CatalogType>(ConfigureCatalogType);
             builder.Entity<CatalogItem>(ConfigureCatalogItem);
+            builder.Entity<Order>(ConfigureOrder);
+            builder.Entity<OrderItem>(ConfigureOrderItem);
+
         }
 
         void ConfigureCatalogBrand(EntityTypeBuilder<CatalogBrand> builder)
@@ -76,6 +86,17 @@ namespace Ckc.EShop.Infrastructure.Data
                 .HasForeignKey(ci => ci.CatalogTypeId);
 
 
+        }
+               
+
+        private void ConfigureOrder(EntityTypeBuilder<Order> builder)
+        {
+            builder.OwnsOne(o => o.ShipToAddress);
+        }
+
+        private void ConfigureOrderItem(EntityTypeBuilder<OrderItem> builder)
+        {
+            builder.OwnsOne(i => i.ItemOrdered);
         }
     }
 }

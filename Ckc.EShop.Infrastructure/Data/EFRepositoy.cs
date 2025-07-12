@@ -1,18 +1,12 @@
 ﻿using Ckc.EShop.ApplicationCore.Entities;
 using Ckc.EShop.ApplicationCore.Interface;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Migrations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ckc.EShop.Infrastructure.Data
 {
-    public class EFRepository<T> : IRepository<T> where T : BaseEntity
+    public class EFRepository<T> : IRepository<T>, IAsyncRepository<T> where T : BaseEntity
     {
-        private readonly CatalogDbContext _dbContext;
+        protected readonly CatalogDbContext _dbContext;
 
         public EFRepository(
             CatalogDbContext dbContext
@@ -20,17 +14,27 @@ namespace Ckc.EShop.Infrastructure.Data
             _dbContext = dbContext;
         }
 
-        public T GetById(int id)
+        public virtual T GetById(int id)
         {
-            return _dbContext.Set<T>().SingleOrDefault(e => e.Id == id);
+            return _dbContext.Set<T>().Find(id);
         }
 
-        public List<T> List()
+        public virtual async Task<T> GetByIdAsync(int id)
         {
-            return _dbContext.Set<T>().ToList();
+            return await _dbContext.Set<T>().FindAsync(id);
         }
 
-        public List<T> List(ISpecification<T> spec)
+        public IEnumerable<T> ListAll()
+        {
+            return _dbContext.Set<T>().AsEnumerable();
+        }
+
+        public async Task<List<T>> ListAllAsync()
+        {
+            return await _dbContext.Set<T>().ToListAsync();
+        }
+
+        public IEnumerable<T> List(ISpecification<T> spec)
         {
             var queryableResultWithInclude = spec.Includes
                 .Aggregate(_dbContext.Set<T>().AsQueryable(),
@@ -42,6 +46,17 @@ namespace Ckc.EShop.Infrastructure.Data
 
         }
 
+        public async Task<List<T>> ListAsync(ISpecification<T> spec)
+        {
+            var queryableResultWithInclude = spec.Includes
+                .Aggregate(_dbContext.Set<T>().AsQueryable(),
+                (current, include) => current.Include(include));
+
+            return await queryableResultWithInclude
+                .Where(spec.Criteria)
+                .ToListAsync();
+        }
+
         public T Add(T entity)
         {
             _dbContext.Set<T>().Add(entity);
@@ -49,17 +64,36 @@ namespace Ckc.EShop.Infrastructure.Data
             return entity;
         }
 
-        public void Delete(T entity)
+        public async Task<T> AddAsync(T entity)
         {
-            _dbContext.Set<T>().Remove(entity);
-            _dbContext.SaveChanges();
+            _dbContext.Set<T>().Add(entity);
+            await _dbContext.SaveChangesAsync();
+            return entity;
         }
-        
 
         public void Update(T entity)
         {
             _dbContext.Entry(entity).State = EntityState.Modified;
             _dbContext.SaveChanges();
+        }
+
+        public async Task UpdateAsync(T entity)
+        {
+            _dbContext.Entry(entity).State = EntityState.Modified;
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public void Delete(T entity)
+        {
+            _dbContext.Set<T>().Remove(entity);
+            _dbContext.SaveChanges();
+        }
+              
+
+        public async Task DeleteAsync(T entity)
+        {
+            _dbContext.Set<T>().Remove(entity);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

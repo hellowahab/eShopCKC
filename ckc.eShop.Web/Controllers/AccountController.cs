@@ -55,7 +55,7 @@ namespace Ckc.EShop.Web.Controllers
                 string anonymousId = Request.Cookies[Constants.Basket_CookieName];
                 if (!string.IsNullOrEmpty(anonymousId))
                 { 
-                    _basketService.TransferBasket(anonymousId, model.Email);
+                    await _basketService.TransferBasketAsync(anonymousId, model.Email);
                     Response.Cookies.Delete(Constants.Basket_CookieName);
                 }
 

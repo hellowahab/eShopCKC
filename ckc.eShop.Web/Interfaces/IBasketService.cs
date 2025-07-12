@@ -16,6 +16,10 @@ namespace Ckc.EShop.Web.Interfaces
 
         Task Checkout(int basketId);
 
-        Task TransferBasket(string anonymousId, string userName);
+        Task TransferBasketAsync(string anonymousId, string userName);
+
+        Task DeleteBasketAsync(int basketId);
+
+        Task SetQuantities(int basketID, Dictionary<string, int> quantities);
     }
 }

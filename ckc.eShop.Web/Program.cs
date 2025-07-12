@@ -30,6 +30,9 @@ namespace Ckc.EShop.Web
             builder.Services.AddTransient<ICatalogService, CatalogService>();
 
             builder.Services.AddScoped<IBasketService, BasketService>();
+            builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+            builder.Services.AddScoped<IOrderService, OrderService>();
+
 
             builder.Services.Configure<CatalogSettings>(builder.Configuration.GetSection("Catalog"));
 
@@ -79,6 +82,8 @@ namespace Ckc.EShop.Web
                 .AddDefaultTokenProviders();
 
             builder.Services.AddScoped(typeof(IRepository<>),typeof(EFRepository<>));
+            builder.Services.AddScoped(typeof(IAsyncRepository<>), typeof(EFRepository<>));
+
 
             var app = builder.Build();
 

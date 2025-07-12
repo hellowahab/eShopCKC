@@ -26,7 +26,7 @@ namespace Ckc.EShop.Web.Services
 
         public async Task<IEnumerable<SelectListItem>> GetBrands()
         {
-            var brands = _brandRepository.List();
+            var brands = _brandRepository.ListAll();
             var items = new List<SelectListItem>();
             items.Add(new SelectListItem()
             {
@@ -51,7 +51,7 @@ namespace Ckc.EShop.Web.Services
             var root = _itemRepository.List(filterSpecification);
             
 
-            var totalItems = root.Count;
+            var totalItems = root.Count();
 
             var itemOnPage = root
                 .Skip(itemsPage * pageIndex)
@@ -83,7 +83,7 @@ namespace Ckc.EShop.Web.Services
 
         public async Task<IEnumerable<SelectListItem>> GetTypes()
         {
-            var types = _typeRepository.List();
+            var types = _typeRepository.ListAll();
             var items = new List<SelectListItem>();
             items.Add(new SelectListItem()
             {

@@ -11,9 +11,9 @@ namespace Ckc.EShop.ApplicationCore.Interface
     {
         T GetById(int id);
 
-        List<T> List();
+        IEnumerable<T> ListAll();
 
-        List<T> List(ISpecification<T> spec);
+        IEnumerable<T> List(ISpecification<T> spec);
 
         T Add(T entity);
 

@@ -1,4 +1,5 @@
-﻿using Ckc.EShop.Infrastructure.Identity;
+﻿using Ckc.EShop.ApplicationCore.Entities.OrderAggregate;
+using Ckc.EShop.Infrastructure.Identity;
 using Ckc.EShop.Web.Interfaces;
 using Ckc.EShop.Web.ViewModels;
 using Microsoft.AspNetCore.Identity;
@@ -12,13 +13,16 @@ namespace Ckc.EShop.Web.Controllers
     {
         private readonly IBasketService _basketService;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IOrderService _orderService;
         private const string _basketSessionKey = "basketId";
 
         public BasketController(IBasketService basketService,
-            SignInManager<ApplicationUser> signInManager) 
+            SignInManager<ApplicationUser> signInManager,
+            IOrderService orderService) 
         {
             _basketService = basketService;
             _signInManager = signInManager;
+            _orderService = orderService;
         }
 
         [HttpGet]
@@ -45,8 +49,12 @@ namespace Ckc.EShop.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Checkout()
         {
-            var basket = await GetBasketViewModelAsync();
-            await _basketService.Checkout(basket.Id);
+            var basketViewModel = await GetBasketViewModelAsync();
+            await _orderService.CreateOrderAsync(basketViewModel.Id,
+                new Address("street", "city", "state", "country", "1234"));
+           
+            //await _basketService.Checkout(basketViewModel.Id);
+            await _basketService.DeleteBasketAsync(basketViewModel.Id);
             return View("Checkout");
         }
 

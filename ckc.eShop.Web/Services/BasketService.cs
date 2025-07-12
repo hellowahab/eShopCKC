@@ -9,11 +9,11 @@ namespace Ckc.EShop.Web.Services
 {
     public class BasketService : IBasketService
     {
-        private readonly IRepository<Basket> _basketRepository;
+        private readonly IAsyncRepository<Basket> _basketRepository;
         private readonly IRepository<CatalogItem> _itemRepository;
         private readonly IUriComposer _uriComposer;
 
-        public BasketService(IRepository<Basket> basketRepository,
+        public BasketService(IAsyncRepository<Basket> basketRepository,
             IRepository<CatalogItem> itemRepository,
             IUriComposer uriComposer) 
         {
@@ -63,7 +63,7 @@ namespace Ckc.EShop.Web.Services
         public async Task<BasketViewModel> GetOrCreateBasketForUser(string userName)
         {
             var basketSpec = new BasketWithItemsSpecification(userName);
-            var basket = _basketRepository.List(basketSpec).FirstOrDefault();
+            var basket = (await _basketRepository.ListAsync(basketSpec)).FirstOrDefault();
 
             if (basket == null)
             {
@@ -76,7 +76,7 @@ namespace Ckc.EShop.Web.Services
         private async Task<BasketViewModel> CreateBasketForUser(string userId)
         {
             var basket = new Basket() { BuyerID = userId };
-            _basketRepository.Add(basket);
+            await _basketRepository.AddAsync(basket);
             return new BasketViewModel()
             {
                 BuyerId = basket.BuyerID,
@@ -105,17 +105,7 @@ namespace Ckc.EShop.Web.Services
                 return itemModel;
             }).ToList();
             return viewModel;
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+          
         
         
         
@@ -124,30 +114,45 @@ namespace Ckc.EShop.Web.Services
 
         public async Task AddItemToBasket(int basketId, int catalogItemId, decimal price, int quantity)
         {
-            var basket = _basketRepository.GetById(basketId); 
+            var basket = await _basketRepository.GetByIdAsync(basketId); 
             basket.AddItem(catalogItemId, price, quantity);
-            _basketRepository.Update(basket);
+            _basketRepository.UpdateAsync(basket);
         }
 
         public async Task Checkout(int basketId)
         {
-            var basket = _basketRepository.GetById(basketId);
-            _basketRepository.Delete(basket);
+            var basket = await _basketRepository.GetByIdAsync(basketId);
+            await _basketRepository.DeleteAsync(basket);
         }
 
-        public Task TransferBasket(string anonymousId, string userName)
+        public async Task TransferBasket(string anonymousId, string userName)
         {
             var basketSpec = new BasketWithItemsSpecification(anonymousId);
-            var basket = _basketRepository.List(basketSpec).FirstOrDefault();
+            var basket = (await _basketRepository.ListAsync(basketSpec)).FirstOrDefault();
             if (basket == null)
             {
-                return Task.CompletedTask;
+                return;
             }
 
             basket.BuyerID = userName;
-            _basketRepository.Update(basket);
-            return Task.CompletedTask;
+            await _basketRepository.UpdateAsync(basket);
 
+        }
+
+        public Task TransferBasketAsync(string anonymousId, string userName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task DeleteBasketAsync(int basketId)
+        {
+            var basket = await _basketRepository.GetByIdAsync(basketId);
+            await _basketRepository.DeleteAsync(basket);
+        }
+
+        public Task SetQuantities(int basketID, Dictionary<string, int> quantities)
+        {
+            throw new NotImplementedException();
         }
     }
 }
