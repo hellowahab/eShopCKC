@@ -4,10 +4,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Ckc.EShop.Infrastructure.Data
 {
-    public class OrderRepository: EFRepository<Order>, IOrderRepository
+    public class OrderRepository: BaseRepository<Order>, IOrderRepository
     {
-        public OrderRepository(CatalogDbContext dbContext) : base(dbContext)
+        private readonly OrderDbContext _dbContext;
+        public OrderRepository(OrderDbContext dbContext) : base(dbContext)
         {
+            _dbContext = dbContext;
         }
 
         public Order GetByIdWithItems(int id)

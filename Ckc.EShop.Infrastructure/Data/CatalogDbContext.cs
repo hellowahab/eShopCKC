@@ -12,7 +12,7 @@ namespace Ckc.EShop.Infrastructure.Data
 
         }
 
-        public DbSet<Basket> Baskets { get; set; }
+        
 
         public DbSet<CatalogItem> CatalogItems { get; set; }
 
@@ -20,9 +20,7 @@ namespace Ckc.EShop.Infrastructure.Data
 
         public DbSet<CatalogType> CatalogTypes { get; set; }
 
-        public DbSet<Order> Orders { get; set; }
-
-        public DbSet<OrderItem> OrderItems { get; set; }
+        
 
 
 
@@ -31,8 +29,7 @@ namespace Ckc.EShop.Infrastructure.Data
             builder.Entity<CatalogBrand>(ConfigureCatalogBrand);
             builder.Entity<CatalogType>(ConfigureCatalogType);
             builder.Entity<CatalogItem>(ConfigureCatalogItem);
-            builder.Entity<Order>(ConfigureOrder);
-            builder.Entity<OrderItem>(ConfigureOrderItem);
+            
 
         }
 
@@ -89,14 +86,6 @@ namespace Ckc.EShop.Infrastructure.Data
         }
                
 
-        private void ConfigureOrder(EntityTypeBuilder<Order> builder)
-        {
-            builder.OwnsOne(o => o.ShipToAddress);
-        }
-
-        private void ConfigureOrderItem(EntityTypeBuilder<OrderItem> builder)
-        {
-            builder.OwnsOne(i => i.ItemOrdered);
-        }
+        
     }
 }
