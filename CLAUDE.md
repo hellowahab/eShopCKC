@@ -54,8 +54,10 @@ The solution follows Clean Architecture principles with three main projects:
 ### Common Development Tasks
 
 #### Running Tests
-- No test project currently exists in the solution
-- To add testing: Create xUnit test projects referencing ApplicationCore and Infrastructure
+- Test project exists: `Ckc.EShop.ApplicationCore.Tests`
+- Run tests: `dotnet test Ckc.EShop.ApplicationCore.Tests`
+- Test framework: xUnit
+- Current test coverage: Basic property validation tests for all entities
 
 #### Database Operations
 - Migrations are managed via EF Core
@@ -89,59 +91,67 @@ The solution follows Clean Architecture principles with three main projects:
 - Repository methods follow CRUD patterns
 - Configuration via `IOptions<T>` pattern
 
-### Improvement Roadmap
-The following areas represent opportunities for enhancing this e-commerce application:
+### Test Coverage Status
 
-#### Short-Term Improvements
-1. **Add Testing Infrastructure**
-   - Create xUnit test projects for ApplicationCore, Infrastructure, and Web layers
-   - Implement unit tests for business logic, specifications, and services
-   - Add integration tests for key user flows (checkout, authentication)
+#### Entity Test Status (ApplicationCore.Tests):
+✓ BaseEntityTests.cs - Tests Id property
+✓ BasketTests.cs - Tests Id, BuyerId properties
+✓ BasketItemsTests.cs - Tests Id, UnitPrice, Quantity, CatalogItemId properties
+✓ CatalogBrandTests.cs - Tests Id, Brand properties (null/empty handling)
+✓ CatalogItemTests.cs - Tests Id, Name, Description, Price, PictureUri, CatalogBrandId, CatalogTypeId properties
+✓ CatalogTypeTests.cs - Tests Id, Type properties (null/empty handling)
 
-2. **Enhance Error Handling & Validation**
-   - Implement FluentValidation for model validation
-   - Add global exception handling middleware
-   - Improve API error responses with proper HTTP status codes
+#### Test Project Details:
+- Project: Ckc.EShop.ApplicationCore.Tests
+- Framework: xUnit with .NET 10.0
+- References: Ckc.EShop.ApplicationCore
+- Test pattern: Property validation (default values and assignment)
 
-3. **Improve Security**
-   - Add rate limiting to API endpoints
-   - Implement security headers (CSP, HSTS, etc.)
-   - Add input sanitization to prevent XSS/CSRF attacks
+#### Improvement Roadmap for Testing:
 
-#### Medium-Term Improvements
-4. **Production-Ready Database Configuration**
-   - Replace InMemoryDatabase with proper SQL Server configuration
-   - Add connection strings to appsettings.json with environment-based switching
-   - Implement database migration strategies for production deployments
+**Short-Term Improvements:**
+1. **Enhanced Entity Testing**
+   - Add boundary value tests (negative numbers, zero values, max/min values)
+   - Test validation if data annotations are added to entities
+   - Test equality/comparison operations if implemented
+   - Test constructor overloading scenarios
 
-5. **API Documentation & Developer Experience**
-   - Add Swagger/OpenAPI documentation for all endpoints
-   - Include XML comments in controllers and models
-   - Configure Swagger UI for development/testing environments
+2. **Relationship Testing**
+   - Test entity relationships (Basket-BasketItems, CatalogItem-CatalogBrand/CatalogType)
+   - Test navigation properties if implemented
+   - Test aggregate root patterns
 
-6. **Logging & Observability**
-   - Implement structured logging with Serilog or built-in logging
-   - Add correlation IDs for request tracing
-   - Configure different log levels per environment
+3. **Service Layer Tests**
+   - Create tests for ApplicationCore services
+   - Mock repository dependencies
+   - Test business logic implementations
 
-#### Long-Term Improvements
-7. **Performance & Scalability**
-   - Add response caching for appropriate endpoints
-   - Implement Redis for distributed caching
-   - Add database indexing strategies and query optimization
+**Medium-Term Improvements:**
+4. **Infrastructure Testing**
+   - Test EF Core repositories with InMemory provider
+   - Test database mapping and migrations
+   - Test identity infrastructure
 
-8. **Advanced Features**
-   - Implement email confirmation and password reset flows
-   - Add role-based authorization (admin/customer roles)
-   - Implement product reviews and ratings system
-   - Add wishlist and coupon/discount functionality
+5. **Integration Testing**
+   - Test service/repository interactions
+   - Test API controller endpoints
+   - Test end-to-end user flows
 
-9. **DevOps & CI/CD**
-   - Create GitHub Actions workflow for automated builds/tests
-   - Add Docker support for containerization
-   - Implement deployment scripts for various environments
+**Long-Term Improvements:**
+6. **Advanced Testing Patterns**
+   - Implement test fixtures for shared setup
+   - Use theory data tests for multiple scenarios
+   - Add mocking framework (Moq) for dependency isolation
+   - Implement test categorization (unit, integration, functional)
 
-10. **Monitoring & Analytics**
-    - Add health check endpoints
-    - Implement metrics collection (Prometheus/Grafana)
-    - Add distributed tracing (OpenTelemetry)
+7. **Test Automation**
+   - Add test reporting and code coverage
+   - Configure test execution in CI/CD pipelines
+   - Add performance/load testing scenarios
+
+### Current Testing Guidelines:
+- All entity tests follow `{EntityName}Tests.cs` naming convention
+- Test methods follow `{PropertyName}_{Scenario}_{ExpectedResult}` pattern
+- Focus on property validation (default values and assignment)
+- Use xUnit attributes: [Fact] for simple tests, [Theory] for parameterized tests
+- Maintain AAA pattern (Arrange, Act, Assert) in all tests
