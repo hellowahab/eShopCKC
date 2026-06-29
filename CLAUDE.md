@@ -109,7 +109,7 @@ The solution follows Clean Architecture principles with three main projects:
 
 #### Improvement Roadmap for Testing:
 
-**Short-Term Improvements:**
+**Phase 1: Immediate Testing Improvements (Short-Term)**
 1. **Enhanced Entity Testing**
    - Add boundary value tests (negative numbers, zero values, max/min values)
    - Test validation if data annotations are added to entities
@@ -126,7 +126,7 @@ The solution follows Clean Architecture principles with three main projects:
    - Mock repository dependencies
    - Test business logic implementations
 
-**Medium-Term Improvements:**
+**Phase 2: Infrastructure and Integration Testing (Medium-Term)**
 4. **Infrastructure Testing**
    - Test EF Core repositories with InMemory provider
    - Test database mapping and migrations
@@ -137,7 +137,7 @@ The solution follows Clean Architecture principles with three main projects:
    - Test API controller endpoints
    - Test end-to-end user flows
 
-**Long-Term Improvements:**
+**Phase 3: Advanced Testing Patterns and Automation (Long-Term)**
 6. **Advanced Testing Patterns**
    - Implement test fixtures for shared setup
    - Use theory data tests for multiple scenarios
@@ -155,3 +155,49 @@ The solution follows Clean Architecture principles with three main projects:
 - Focus on property validation (default values and assignment)
 - Use xUnit attributes: [Fact] for simple tests, [Theory] for parameterized tests
 - Maintain AAA pattern (Arrange, Act, Assert) in all tests
+
+## Improvement Roadmap (Area‑wise)
+
+### 1️⃣ Testing
+- **Immediate testing improvements** – add boundary‑value tests, relationship tests, and a shared test fixture for seeded data.
+- **Service‑layer tests** – mock repositories with Moq and verify business logic.
+- **Infrastructure tests** – EF Core integration tests using SQLite in‑memory provider; identity tests.
+- **Integration / end‑to‑end tests** – spin up the Web API with `Microsoft.AspNetCore.Mvc.Testing` and exercise full request flows.
+- **Automation** – add test reporting, code‑coverage badge, and CI execution on every PR.
+
+### 2️⃣ Service Layer & Business Logic
+- Extract core business logic into interfaces such as `ICatalogService`, `IBasketService`, `IOrderService`.
+- Implement these services in `ApplicationCore/Services` and register them in `Program.cs`.
+- Write unit tests for each service method, mocking `IRepository<T>`.
+- Document the contracts in a markdown spec (`docs/CoreServices.md`).
+
+### 3️⃣ Infrastructure & Persistence
+- Replace the InMemory provider with a real SQL Server (or PostgreSQL) container for integration tests and production.
+- Add Docker‑compose file for the database and update `Program.cs` to read the connection string.
+- Create EF Core integration tests that verify entity mappings, migrations, and the identity schema.
+- Ensure migrations run cleanly via CI (`dotnet ef migrations list` check).
+
+### 4️⃣ API & End‑to‑End
+- Add minimal Web API controllers (`/api/catalog`, `/api/basket`, `/api/orders`).
+- Enable Swagger/OpenAPI generation for documentation.
+- Write integration tests using `Microsoft.AspNetCore.Mvc.Testing` to cover common user flows.
+- Keep existing Razor views functional; update them to call the new services where needed.
+
+### 5️⃣ Security & Authentication
+- Harden ASP.NET Core Identity: enforce strong passwords, email confirmation, lockout.
+- Add role‑based authorization on sensitive endpoints (admin, order management).
+- (Optional) Implement JWT‑bearer token authentication for external clients.
+
+### 6️⃣ Performance, Observability & CI/CD
+- Add OpenTelemetry / Application Insights for request and DB latency metrics.
+- Introduce in‑memory caching for read‑only catalog queries.
+- Extend GitHub Actions to build, run all tests, publish coverage, and build Docker images.
+- Create Helm chart or K8s manifests with health probes and a blue‑green/canary deployment strategy.
+
+### 7️⃣ Long‑Term Enhancements
+- Adopt property‑based testing (FsCheck) and load testing (k6).
+- Introduce feature flags (`Microsoft.FeatureManagement`).
+- Refactor entities toward richer domain behavior and domain events.
+- Generate a documentation site (DocFX) from markdown files for onboarding.
+
+These area‑wise improvements provide a clear, incremental path from the current baseline to a fully tested, secure, and production‑ready eShopCKC application.
