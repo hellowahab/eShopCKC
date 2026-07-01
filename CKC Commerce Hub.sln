@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 18
-VisualStudioVersion = 18.8.11918.235
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37411.7 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ckc.EShop.Web", "ckc.eShop.Web\Ckc.EShop.Web.csproj", "{FA861134-D297-59A3-ED74-DDA501E20324}"
 EndProject
@@ -34,6 +34,15 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{695C63FE-C481-4B56-A5F4-DCF7C5503071}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{AB4A57F0-4E55-4A99-90BF-B11ECF987EC6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ADR", "ADR", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		0001-project-vision.md = 0001-project-vision.md
+		0002-modular-monolith.md = 0002-modular-monolith.md
+		0003-ddd.md = 0003-ddd.md
+		0004-cqrs.md = 0004-cqrs.md
+		0005-outbox.md = 0005-outbox.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -102,6 +111,7 @@ Global
 		{EEC6B7A6-B073-4874-BC69-9339A88299D8} = {AB665E22-4F54-4B4A-8BD1-DF5B063E910D}
 		{3CCD1309-380D-48BE-A1F9-E9F7ABF67912} = {AB665E22-4F54-4B4A-8BD1-DF5B063E910D}
 		{7DB67661-9408-4175-8EB8-287BEE8ACB09} = {AB665E22-4F54-4B4A-8BD1-DF5B063E910D}
+		{02EA681E-C7D8-13C7-8484-4AC65E1B71E8} = {22A04448-08EF-47F0-963F-B8437CAA6432}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6198A5E9-D19D-439F-80F8-FC54252B4599}

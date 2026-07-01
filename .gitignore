@@ -25,3 +25,8 @@ Ckc.EShop.ApplicationCore/obj/
 /Ckc.EShop.ApplicationCore.Tests/obj/Debug/net10.0/Ckc.EShop.ApplicationCore.Tests.GeneratedMSBuildEditorConfig.editorconfig
 /Ckc.EShop.ApplicationCore.Tests/obj/Debug/net10.0/Ckc.EShop.ApplicationCore.Tests.pdb
 /Ckc.EShop.ApplicationCore.Tests/obj/Debug/net11.0
+/Ckc.EShop.ApplicationCore.Tests/obj/Ckc.EShop.ApplicationCore.Tests.csproj.nuget.dgspec.json
+/Ckc.EShop.ApplicationCore.Tests/obj/Ckc.EShop.ApplicationCore.Tests.csproj.nuget.g.props
+/Ckc.EShop.ApplicationCore.Tests/obj/Ckc.EShop.ApplicationCore.Tests.csproj.nuget.g.targets
+/Ckc.EShop.ApplicationCore.Tests/obj/project.assets.json
+/Ckc.EShop.ApplicationCore.Tests/obj/project.nuget.cache
