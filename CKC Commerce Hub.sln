@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.8.11918.235 insiders
+VisualStudioVersion = 18.8.11918.235
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ckc.EShop.Web", "ckc.eShop.Web\Ckc.EShop.Web.csproj", "{FA861134-D297-59A3-ED74-DDA501E20324}"
 EndProject
@@ -11,11 +11,29 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ckc.EShop.ApplicationCore",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
 	ProjectSection(SolutionItems) = preProject
+		Architecture.md = Architecture.md
 		CLAUDE.md = CLAUDE.md
 		MICROSERVICES_MIGRATION_PLAN.md = MICROSERVICES_MIGRATION_PLAN.md
+		Roadmap.md = Roadmap.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ckc.EShop.ApplicationCore.Tests", "Ckc.EShop.ApplicationCore.Tests\Ckc.EShop.ApplicationCore.Tests.csproj", "{7DB67661-9408-4175-8EB8-287BEE8ACB09}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AB665E22-4F54-4B4A-8BD1-DF5B063E910D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "services", "services", "{4CA2C11E-2192-40D4-81BF-8AB8AF91A934}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{466C4A00-816F-4610-AB07-4CBDAD428503}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{22A04448-08EF-47F0-963F-B8437CAA6432}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{DA500D7A-5C0C-4A1C-AE7A-4D7CDFFB6997}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{1BE4ECDC-F12C-4C7E-9C88-F97BC38FA345}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{695C63FE-C481-4B56-A5F4-DCF7C5503071}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{AB4A57F0-4E55-4A99-90BF-B11ECF987EC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,6 +96,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FA861134-D297-59A3-ED74-DDA501E20324} = {AB665E22-4F54-4B4A-8BD1-DF5B063E910D}
+		{EEC6B7A6-B073-4874-BC69-9339A88299D8} = {AB665E22-4F54-4B4A-8BD1-DF5B063E910D}
+		{3CCD1309-380D-48BE-A1F9-E9F7ABF67912} = {AB665E22-4F54-4B4A-8BD1-DF5B063E910D}
+		{7DB67661-9408-4175-8EB8-287BEE8ACB09} = {AB665E22-4F54-4B4A-8BD1-DF5B063E910D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6198A5E9-D19D-439F-80F8-FC54252B4599}
