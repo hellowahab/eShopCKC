@@ -1,6 +1,6 @@
-🛒 Build a Production-Ready eCommerce App with ASP.NET Core
+🛒 CKC Commerce Hub
 
-Welcome to the official repository for the **Complete Beginner-Friendly eCommerce App Series using ASP.NET Core**. This project is developed as part of a multi-part video tutorial series where we build a **real-world**, **open-source**, and **production-ready** eCommerce web application from scratch.
+CKC Commerce Hub is a cloud-native enterprise commerce platform that I am building to explore modern software architecture patterns. It includes (or going to) order management, inventory, payments, notifications, identity, analytics, and AI-powered capabilities. The goal is to implement production-grade architectural patterns such as DDD, CQRS, Event-Driven Architecture, Outbox Pattern, Redis caching, Kubernetes deployment, and CI/CD.
 
 ## 📺 Video Series
 
@@ -33,7 +33,7 @@ This tutorial series is published on YouTube and walks you step-by-step through 
 
 ## 🚀 Tech Stack
 
-- **Backend:** ASP.NET Core 9
+- **Backend:** ASP.NET Core 9 --> Upgraded to 11.0
 - **ORM:** Entity Framework Core
 - **Database:** SQL Server
 - **Architecture:** Clean Architecture with Repository Pattern
